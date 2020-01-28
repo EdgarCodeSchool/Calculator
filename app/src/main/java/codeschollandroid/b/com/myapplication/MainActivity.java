@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvTotal;
     private Button btn_ac;
@@ -31,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_equal;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         tvTotal = findViewById(R.id.tv_result);
         btn_plusminus = findViewById(R.id.btn_plusminus);
@@ -59,74 +60,18 @@ public class MainActivity extends AppCompatActivity {
         btn_ac = findViewById(R.id.btn_ac);
 
 
-        btn_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(1);
-            }
-        });
-        btn_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(2);
-            }
-        });
-        btn_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(3);
-            }
-        });
-        btn_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(4);
-            }
-        });
-        btn_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(5);
-            }
-        });
-        btn_6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(6);
-            }
-        });
-        btn_7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(7);
-            }
-        });
-        btn_8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(8);
-            }
-        });
-        btn_9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(9);
-            }
-        });
-        btn_0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNumber(0);
-            }
-
-        });
-
-        btn_ac.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               tvTotal.setText("0");
-            }
-        });
+        btn_1.setOnClickListener(this);
+        btn_1.setOnClickListener(this);
+        btn_2.setOnClickListener(this);
+        btn_3.setOnClickListener(this);
+        btn_4.setOnClickListener(this);
+        btn_5.setOnClickListener(this);
+        btn_6.setOnClickListener(this);
+        btn_7.setOnClickListener(this);
+        btn_8.setOnClickListener(this);
+        btn_9.setOnClickListener(this);
+        btn_0.setOnClickListener(this);
+        btn_ac.setOnClickListener(this);
     }
 
     private void showNumber(int number) {
@@ -138,4 +83,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_0:
+                showNumber(0);
+                break;
+            case R.id.btn_1:
+                showNumber(1);
+                break;
+            case R.id.btn_2:
+                showNumber(2);
+                break;
+            case R.id.btn_3:
+                showNumber(3);
+                break;
+            case R.id.btn_4:
+                showNumber(4);
+                break;
+            case R.id.btn_5:
+                showNumber(5);
+                break;
+            case R.id.btn_6:
+                showNumber(6);
+                break;
+            case R.id.btn_7:
+                showNumber(7);
+                break;
+            case R.id.btn_8:
+                showNumber(8);
+                break;
+            case R.id.btn_9:
+                showNumber(9);
+                break;
+            case R.id.btn_ac:
+                tvTotal.setText("0");
+                break;
+        }
+    }
 }
