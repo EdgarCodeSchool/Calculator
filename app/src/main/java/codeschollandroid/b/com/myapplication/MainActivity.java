@@ -1,7 +1,6 @@
 package codeschollandroid.b.com.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +28,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_0;
     private Button btn_dot;
     private Button btn_equal;
+
+
+private Calculator cal=new Calculator();
+private double number;
+private String oper1;
+private String oper2="null";
 
 
     @Override
@@ -72,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_9.setOnClickListener(this);
         btn_0.setOnClickListener(this);
         btn_ac.setOnClickListener(this);
+
+        btn_add.setOnClickListener(this);
+        btn_sub.setOnClickListener(this);
+        btn_mul.setOnClickListener(this);
+        btn_div.setOnClickListener(this);
     }
 
     private void showNumber(int number) {
@@ -87,38 +97,100 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_0:
-                showNumber(0);
+                checkForNumber(0);
                 break;
             case R.id.btn_1:
-                showNumber(1);
+                checkForNumber(1);
                 break;
             case R.id.btn_2:
-                showNumber(2);
+                checkForNumber(2);
                 break;
             case R.id.btn_3:
-                showNumber(3);
+                checkForNumber(3);
                 break;
             case R.id.btn_4:
-                showNumber(4);
+                checkForNumber(4);
                 break;
             case R.id.btn_5:
-                showNumber(5);
+                checkForNumber(5);
                 break;
             case R.id.btn_6:
-                showNumber(6);
+                checkForNumber(6);
                 break;
             case R.id.btn_7:
-                showNumber(7);
+                checkForNumber(7);
                 break;
             case R.id.btn_8:
-                showNumber(8);
+                checkForNumber(8);
                 break;
             case R.id.btn_9:
-                showNumber(9);
+                checkForNumber(9);
+
                 break;
             case R.id.btn_ac:
                 tvTotal.setText("0");
+                oper2="null";
+                oper1=null;
                 break;
+            case R.id.btn_add:
+                oper1="add";
+                checkOperator("add");
+                break;
+            case R.id.btn_sub:
+                oper1="sub";
+                checkOperator("sub");
+                break;
+            case R.id.btn_mul:
+                oper2=null;
+                oper1="mul";
+                checkOperator("mul");
+                break;
+            case R.id.btn_div:
+                oper1="div";
+                checkOperator("div");
+                break;
+
+        }
+
+
+    }
+
+    private void checkForNumber(int i) {
+        if (oper1 != null) {
+            oper2 = oper1;
+            oper1 = null;
+            tvTotal.setText(String.valueOf(i));
+        } else {
+            showNumber(i);
+        }
+    }
+
+    private void checkOperator(String operator) {
+        switch (oper2){
+            case "add":
+          double add= cal.add(number,Double.valueOf(tvTotal.getText().toString()));
+                tvTotal.setText(String.valueOf(add));
+                number = Double.valueOf(tvTotal.getText().toString());
+                break;
+            case "sub":
+              double sub=cal.sub(number, Double.valueOf(tvTotal.getText().toString()));
+                tvTotal.setText(String.valueOf(sub));
+                number = Double.valueOf(tvTotal.getText().toString());
+                break;
+            case "mul":
+                double mul=cal.mul(number, Double.valueOf(tvTotal.getText().toString()));
+                tvTotal.setText(String.valueOf(mul));
+                number = Double.valueOf(tvTotal.getText().toString());
+                break;
+            case "div":
+                double div=cal.div(number, Double.valueOf(tvTotal.getText().toString()));
+                tvTotal.setText(String.valueOf(div));
+                number = Double.valueOf(tvTotal.getText().toString());
+                break;
+            case "null":
+                oper1=operator;
+                number = Double.valueOf(tvTotal.getText().toString());
+
         }
     }
 }
